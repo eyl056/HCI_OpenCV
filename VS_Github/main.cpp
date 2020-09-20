@@ -7,6 +7,7 @@ int main() {
 	cin >> a >> b;
 
 	cout << a << " " << b;
+	// add from github
 
 	return 0;
 }
