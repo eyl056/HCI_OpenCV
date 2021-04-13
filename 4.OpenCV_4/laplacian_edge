@@ -1,0 +1,44 @@
+#include <iostream>
+#include <opencv2/opencv.hpp>
+#include "Pixel.h"
+#include "Filter.h"
+#include "Util.h"
+#include "Color.h"
+#include "Geometry.h"
+#include "Edge.h"
+
+using namespace std;
+using namespace cv;
+
+int main() {
+
+	// 사진 불러오기
+	Mat Jenny = imread("C:/Users/eunyoung/Desktop/1.OpenCV_1/image/jenny.jpg");
+	Mat Rice = imread("C:/Users/eunyoung/Desktop/1.OpenCV_1/image/rice.png");
+
+	Mat Gray_Jenny, Gray_Rice;
+	// convert to Gray scale image
+	cvtColor(Jenny, Gray_Jenny, CV_BGR2GRAY);
+	cvtColor(Rice, Gray_Rice, CV_BGR2GRAY);
+
+	// gray scale image 출력
+	imshow("Gray_Jenny", Gray_Jenny);
+	imshow("Gray_Rice", Gray_Rice);
+
+	CEdge CE;
+
+	Mat Laplacian_Jenny, Laplacian_Rice;
+
+	// 라플라시안 에지 추출 : Laplacian() (Extraction Laplacian edge: Laplacian())
+	Laplacian_Jenny = CE.GS_laplacian_edge_Laplacian(Gray_Jenny);
+	Laplacian_Rice = CE.GS_laplacian_edge_Laplacian(Gray_Rice);
+	
+
+	// 이미지 출력
+	imshow("Laplacian_Jenny", Laplacian_Jenny);
+	imshow("Laplacian_Rice", Laplacian_Rice);
+
+	waitKey(); // 입력 대기 (0이거나 비워있으면 키 입력 무한 대기)
+	return 0;
+}
+
