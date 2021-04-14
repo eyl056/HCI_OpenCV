@@ -1,0 +1,37 @@
+#include <iostream>
+#include <opencv2/opencv.hpp>
+#include "Pixel.h"
+#include "Filter.h"
+#include "Util.h"
+#include "Color.h"
+#include "Geometry.h"
+#include "Edge.h"
+
+using namespace std;
+using namespace cv;
+
+int main() {
+
+	// 사진 불러오기
+	Mat Briefcase = imread("C:/Users/eunyoung/Desktop/1.OpenCV_1/image/briefcase.jpg");
+
+	//Mat Gray_Briefcase;
+	// convert to Gray scale image
+	//cvtColor(Briefcase, Gray_Briefcase, CV_BGR2GRAY);
+
+	// gray scale image 출력
+	imshow("Briefcase", Briefcase);
+
+	CGeometry CG;
+
+	// 어파인 변환을 이용한 회전 (Rotation using affine transform)
+	Mat rotate_Briefcase = CG.GS_affineRotate(Briefcase, -45.0, 1.0);
+	// 회전 시킨 이미지를 다시 1.5배 확대 시키기
+	Mat Enlarge_Rotate_Briefcase = CG.GS_affineRotate(rotate_Briefcase, 0.0, 1.5);
+
+	imshow("rotate_Briefcase", rotate_Briefcase);
+	imshow("Enlarge_Rotate_Briefcase", Enlarge_Rotate_Briefcase);
+
+	waitKey(); // 입력 대기 (0이거나 비워있으면 키 입력 무한 대기)
+	return 0;
+}
